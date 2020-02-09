@@ -13,11 +13,37 @@ namespace HotelManager
     public partial class Menu : Form
     {
         private User _user;
+        private MenuItem[] _items;
 
         public Menu(User authorizedUser)
         {
-            _user = authorizedUser;
             InitializeComponent();
+
+            _user = authorizedUser;
+            _items = new MenuItem[]
+            {
+                new MenuItem(new Form(), Role.Administrator, _guestsButton),
+                new MenuItem(new Form(), Role.Manager, _adminsButton),
+                new MenuItem(new Form(), Role.Manager, _hotelsButton),
+                new MenuItem(new Form(), Role.Administrator, _roomsButton),
+                new MenuItem(new Form(), Role.Administrator, _settlementButton),
+                new MenuItem(new Form(), Role.Administrator, _deportationButton)
+            };
+        }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+            foreach (var item in _items)
+                item.TryShowButton(_user);
+            MessageBox.Show($"Вы авторизовались под ролью {GetRoleName(_user.Role)}", "Напоминание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private string GetRoleName(Role role)
+        {
+            if (role == Role.Administrator)
+                return "Администратор гостиницы";
+            else
+                return "Управляющий сети гостиниц";
         }
     }
 }
