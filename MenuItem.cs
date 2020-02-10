@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace HotelManager
 {
@@ -6,25 +7,29 @@ namespace HotelManager
     {
         private Role _necessaryRole;
         private Form _formToOpen;
+        private Form _menu;
         private Button _button;
 
-        public MenuItem(Form formToOpen, Role necessaryRole, Button button)
+        public MenuItem(Form formToOpen, Form menu, Role necessaryRole, Button button)
         {
             _formToOpen = formToOpen;
+            _menu = menu;
             _necessaryRole = necessaryRole;
             _button = button;
+
+            _button.Click += OnButtonClick;
         }
 
-        public void ShowForm(Form oldForm)
+        private void OnButtonClick(object sender, EventArgs e)
         {
             _formToOpen.StartPosition = FormStartPosition.Manual;
-            _formToOpen.Location = oldForm.Location;
-            _formToOpen.Size = oldForm.Size;
+            _formToOpen.Location = _menu.Location;
+            _formToOpen.Size = _menu.Size;
 
-            _formToOpen.FormClosed += (x, y) => oldForm.Close();
+            _formToOpen.FormClosed += (x, y) => _menu.Show();
 
             _formToOpen.Show();
-            oldForm.Hide();
+            _menu.Hide();
         }
 
         public bool TryShowButton(User user)

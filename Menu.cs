@@ -22,12 +22,12 @@ namespace HotelManager
             _user = authorizedUser;
             _items = new MenuItem[]
             {
-                new MenuItem(new Form(), Role.Administrator, _guestsButton),
-                new MenuItem(new Form(), Role.Manager, _adminsButton),
-                new MenuItem(new Form(), Role.Manager, _hotelsButton),
-                new MenuItem(new Form(), Role.Administrator, _roomsButton),
-                new MenuItem(new Form(), Role.Administrator, _settlementButton),
-                new MenuItem(new Form(), Role.Administrator, _deportationButton)
+                new MenuItem(new GuestsForm(), this, Role.Administrator, _guestsButton),
+                new MenuItem(new Form(), this, Role.Manager, _adminsButton),
+                new MenuItem(new Form(), this, Role.Manager, _hotelsButton),
+                new MenuItem(new Form(), this, Role.Administrator, _roomsButton),
+                new MenuItem(new Form(), this, Role.Administrator, _settlementButton),
+                new MenuItem(new Form(), this, Role.Administrator, _deportationButton)
             };
         }
 

@@ -52,6 +52,25 @@
     <Compile Include="Authorization.Designer.cs">
       <DependentUpon>Authorization.cs</DependentUpon>
     </Compile>
+    <Compile Include="Guest.cs" />
+    <Compile Include="GuestConstructor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GuestConstructor.Designer.cs">
+      <DependentUpon>GuestConstructor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GuestInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GuestInformation.Designer.cs">
+      <DependentUpon>GuestInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GuestsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GuestsForm.Designer.cs">
+      <DependentUpon>GuestsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +85,12 @@
     <Compile Include="UserDatabase.cs" />
     <EmbeddedResource Include="Authorization.resx">
       <DependentUpon>Authorization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuestConstructor.resx">
+      <DependentUpon>GuestConstructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuestsForm.resx">
+      <DependentUpon>GuestsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
