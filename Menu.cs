@@ -12,9 +12,6 @@ namespace HotelManager
 {
     public partial class Menu : Form
     {
-        private User _user;
-        private MenuItem[] _items;
-
         public Menu(User authorizedUser)
         {
             InitializeComponent();
@@ -30,6 +27,9 @@ namespace HotelManager
                 new MenuItem(new Form(), this, Role.Administrator, _deportationButton)
             };
         }
+
+        private User _user;
+        private MenuItem[] _items;
 
         private void Menu_Load(object sender, EventArgs e)
         {

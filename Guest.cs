@@ -2,7 +2,7 @@
 
 namespace HotelManager
 {
-    public class Guest
+    public class Guest : IIdentifiable
     {
         public int Id { get; }
 

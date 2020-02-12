@@ -48,7 +48,7 @@
             this._guestListView.TabIndex = 0;
             this._guestListView.UseCompatibleStateImageBehavior = false;
             this._guestListView.View = System.Windows.Forms.View.List;
-            this._guestListView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GuestListView_MouseClick);
+            this._guestListView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ListView_MouseClick);
             this._guestListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.GuestListView_MouseDoubleClick);
             // 
             // _guestAdditionButton
@@ -60,7 +60,7 @@
             this._guestAdditionButton.TabIndex = 1;
             this._guestAdditionButton.Text = "Добавить постояльца";
             this._guestAdditionButton.UseVisualStyleBackColor = true;
-            this._guestAdditionButton.Click += new System.EventHandler(this.GuestAdditionButton_Click);
+            this._guestAdditionButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // _contextMenuStrip
             // 
@@ -84,7 +84,7 @@
             this.Controls.Add(this._guestAdditionButton);
             this.Controls.Add(this._guestListView);
             this.Name = "GuestsForm";
-            this.Text = "GuestsForm";
+            this.Text = "Постояльцы";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GuestsForm_FormClosing);
             this.Load += new System.EventHandler(this.GuestsForm_Load);
             this._contextMenuStrip.ResumeLayout(false);

@@ -250,7 +250,7 @@
             this._cancelButton.TabIndex = 20;
             this._cancelButton.Text = "Отмена";
             this._cancelButton.UseVisualStyleBackColor = true;
-            this._cancelButton.Click += new System.EventHandler(this._cancelButton_Click);
+            this._cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // _genderGroupBox
             // 

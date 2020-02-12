@@ -5,11 +5,6 @@ namespace HotelManager
 {
     public class MenuItem
     {
-        private Role _necessaryRole;
-        private Form _formToOpen;
-        private Form _menu;
-        private Button _button;
-
         public MenuItem(Form formToOpen, Form menu, Role necessaryRole, Button button)
         {
             _formToOpen = formToOpen;
@@ -19,6 +14,11 @@ namespace HotelManager
 
             _button.Click += OnButtonClick;
         }
+
+        private Role _necessaryRole;
+        private Form _formToOpen;
+        private Form _menu;
+        private Button _button;
 
         private void OnButtonClick(object sender, EventArgs e)
         {

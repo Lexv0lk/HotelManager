@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,11 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adress.cs" />
     <Compile Include="Authorization.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Authorization.Designer.cs">
       <DependentUpon>Authorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Constructor.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Guest.cs" />
     <Compile Include="GuestConstructor.cs">
@@ -59,17 +66,28 @@
     <Compile Include="GuestConstructor.Designer.cs">
       <DependentUpon>GuestConstructor.cs</DependentUpon>
     </Compile>
-    <Compile Include="GuestInformation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GuestInformation.Designer.cs">
-      <DependentUpon>GuestInformation.cs</DependentUpon>
-    </Compile>
     <Compile Include="GuestsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GuestsForm.Designer.cs">
       <DependentUpon>GuestsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel.cs" />
+    <Compile Include="HotelConstructor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HotelConstructor.Designer.cs">
+      <DependentUpon>HotelConstructor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HotelsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HotelsForm.Designer.cs">
+      <DependentUpon>HotelsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IIdentifiable.cs" />
+    <Compile Include="ListForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
@@ -92,6 +110,12 @@
     <EmbeddedResource Include="GuestsForm.resx">
       <DependentUpon>GuestsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HotelConstructor.resx">
+      <DependentUpon>HotelConstructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HotelsForm.resx">
+      <DependentUpon>HotelsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,6 +128,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace HotelManager
 {
-    public partial class GuestConstructor : Form
+    public partial class GuestConstructor : Constructor<Guest>
     {
         private GuestConstructor()
         {
@@ -41,7 +41,7 @@ namespace HotelManager
         private int _newId;
         private Guest _guestToChange;
 
-        public Action<Guest, GuestConstructor> GuestCreated;
+        public override event Action<Guest> ItemCreated;
 
         private void AddingButton_Click(object sender, EventArgs e)
         {
@@ -80,7 +80,7 @@ namespace HotelManager
             if (_guestToChange == null)
             {
                 Guest newGuest = new Guest(_newId, name, surname, middleName, birthDate, gender, phone, passportSeries, passportNumber, passportIssueDate);
-                GuestCreated?.Invoke(newGuest, this);
+                ItemCreated?.Invoke(newGuest);
             }
             else
             {
@@ -98,10 +98,7 @@ namespace HotelManager
             Close();
         }
 
-        private void _cancelButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void CancelButton_Click(object sender, EventArgs e) => Close();
 
         private void DisplayError(string text) => MessageBox.Show(text, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
