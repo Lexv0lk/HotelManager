@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 
 namespace HotelManager
 {
@@ -97,9 +96,5 @@ namespace HotelManager
 
             Close();
         }
-
-        private void CancelButton_Click(object sender, EventArgs e) => Close();
-
-        private void DisplayError(string text) => MessageBox.Show(text, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 }

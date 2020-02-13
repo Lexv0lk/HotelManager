@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 
 namespace HotelManager
 {
@@ -17,14 +16,18 @@ namespace HotelManager
 
         protected void GuestsForm_FormClosing(object sender, EventArgs e)
         {
-            SaveList();
+            Database.Save();
         }
 
         protected void GuestsForm_Load(object sender, EventArgs e)
         {
-            LoadList();
             for (int i = 0; i < ItemList.Count; i++)
+            {
+                if (IsSuitable(ItemList[i]) == false)
+                    continue;
+
                 ListView.Items.Add(GetListViewItem(ItemList[i]));
+            }
         }
 
         private void OpenForm(Form form)
@@ -37,42 +40,6 @@ namespace HotelManager
 
             form.Show();
             Hide();
-        }
-
-        private void LoadList()
-        {
-            string[] keyNames = Registry.CurrentUser.GetSubKeyNames()
-                                                .Where(x => x.StartsWith(KeyStart))
-                                                .ToArray();
-            if (keyNames.Length == 0)
-                return;
-
-            foreach (var keyName in keyNames)
-            {
-                RegistryKey key = Registry.CurrentUser.OpenSubKey(keyName);
-                Item item = JsonConvert.DeserializeObject<Item>((string)key.GetValue("Object"));
-                ItemList.Add(item);
-            }
-        }
-
-        private void SaveList()
-        {
-            string[] existingKeys = Registry.CurrentUser.GetSubKeyNames();
-            for (int i = 0; i < ItemList.Count; i++)
-            {
-                string json = JsonConvert.SerializeObject(ItemList[i]);
-                RegistryKey key = GetKey(ItemList[i].Id, existingKeys);
-                key.SetValue("Object", json);
-                key.Close();
-            }
-        }
-
-        private RegistryKey GetKey(int id, string[] existingSubKeys)
-        {
-            if (existingSubKeys.Contains($"{KeyStart}{id}"))
-                return Registry.CurrentUser.OpenSubKey($"{KeyStart}{id}", true);
-            else
-                return Registry.CurrentUser.CreateSubKey($"{KeyStart}{id}");
         }
 
         protected void ListView_MouseClick(object sender, MouseEventArgs e)
@@ -136,5 +103,7 @@ namespace HotelManager
         protected abstract Constructor<Item> GetCreatingConstructor();
 
         protected abstract Constructor<Item> GetEditingConstructor(Item editableItem);
+
+        protected abstract bool IsSuitable(Item item);
     }
 }

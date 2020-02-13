@@ -32,9 +32,9 @@ namespace HotelManager
             _menu.Hide();
         }
 
-        public bool TryShowButton(User user)
+        public bool TryShowButton(Role role)
         {
-            if (user.Role != _necessaryRole)
+            if (role != _necessaryRole)
                 return false;
 
             _button.Visible = true;

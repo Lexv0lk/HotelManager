@@ -11,12 +11,10 @@ namespace HotelManager
         }
 
         protected override ListView ListView => _guestListView;
-        protected override List<Guest> ItemList => _guests;
+        protected override List<Guest> ItemList => Database.Guests;
         protected override ContextMenuStrip MenuStrip => _contextMenuStrip;
         protected override ToolStripMenuItem DeleteStripMenuItem => _deleteStripMenuItem;
         protected override string KeyStart => "Guest";
-
-        private List<Guest> _guests = new List<Guest>();
 
         protected override ListViewItem GetListViewItem(Guest guest)
         {
@@ -28,5 +26,7 @@ namespace HotelManager
         protected override Constructor<Guest> GetCreatingConstructor() => new GuestConstructor(GetNewId());
 
         protected override Constructor<Guest> GetEditingConstructor(Guest guest) => new GuestConstructor(guest);
+
+        protected override bool IsSuitable(Guest item) => true;
     }
 }

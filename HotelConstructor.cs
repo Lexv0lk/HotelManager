@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace HotelManager
 {
@@ -55,7 +47,7 @@ namespace HotelManager
 
             if (country == "" || city == "" || street == "" || house == "")
             {
-                MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayError("Не все поля заполнены!");
                 return;
             }
 
@@ -75,11 +67,6 @@ namespace HotelManager
                 _existingHotel.Adress.House = house;
             }
 
-            Close();
-        }
-
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
             Close();
         }
     }

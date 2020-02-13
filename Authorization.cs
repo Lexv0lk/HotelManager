@@ -26,9 +26,24 @@ namespace HotelManager
             string login = _loginTextBox.Text;
             string password = _passwordTextBox.Text;
 
-            foreach (var user in UserDatabase.Users)
+            foreach (var user in Database.DefaultUsers)
+            {
                 if (user.TryLogin(login, password))
-                    ShowMenu(user);
+                {
+                    ShowMenu(user.Role);
+                    return;
+                }
+            }
+
+            foreach (var admin in Database.Administrators)
+            {
+                if (admin.TryLogin(login, password))
+                {
+                    Administrator.Authorized = admin;
+                    ShowMenu(Role.Administrator);
+                    return;
+                }
+            }
 
             _triesLeft--;
             if (_triesLeft <= 0)
@@ -62,9 +77,9 @@ namespace HotelManager
                 DisableTimer();
         }
 
-        private void ShowMenu(User user)
+        private void ShowMenu(Role role)
         {
-            Menu menu = new Menu(user);
+            Menu menu = new Menu(role);
 
             menu.StartPosition = FormStartPosition.Manual;
             menu.Location = Location;

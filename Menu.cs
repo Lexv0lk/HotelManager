@@ -5,15 +5,15 @@ namespace HotelManager
 {
     public partial class Menu : Form
     {
-        public Menu(User authorizedUser)
+        public Menu(Role authorizedUserRole)
         {
             InitializeComponent();
 
-            _user = authorizedUser;
+            _role = authorizedUserRole;
             _items = new MenuItem[]
             {
                 new MenuItem(new GuestsForm(), this, Role.Administrator, _guestsButton),
-                new MenuItem(new Form(), this, Role.Manager, _adminsButton),
+                new MenuItem(new AdministratorsForm(), this, Role.Manager, _adminsButton),
                 new MenuItem(new HotelsForm(), this, Role.Manager, _hotelsButton),
                 new MenuItem(new Form(), this, Role.Administrator, _roomsButton),
                 new MenuItem(new Form(), this, Role.Administrator, _settlementButton),
@@ -21,14 +21,14 @@ namespace HotelManager
             };
         }
 
-        private User _user;
+        private Role _role;
         private MenuItem[] _items;
 
         private void Menu_Load(object sender, EventArgs e)
         {
             foreach (var item in _items)
-                item.TryShowButton(_user);
-            MessageBox.Show($"Вы авторизовались под ролью {GetRoleName(_user.Role)}", "Напоминание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                item.TryShowButton(_role);
+            MessageBox.Show($"Вы авторизовались под ролью {GetRoleName(_role)}", "Напоминание", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private string GetRoleName(Role role)

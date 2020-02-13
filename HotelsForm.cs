@@ -11,7 +11,7 @@ namespace HotelManager
         public HotelsForm()
         {
             InitializeComponent();
-            _filteredHotels = _hotels.ToList();
+            _filteredHotels = Database.Hotels.ToList();
 
             _countryTextBox.TextChanged += OnTextChanged;
             _cityTextBox.TextChanged += OnTextChanged;
@@ -19,11 +19,10 @@ namespace HotelManager
             _houseTextBox.TextChanged += OnTextChanged;
         }
 
-        private List<Hotel> _hotels = new List<Hotel>();
         private List<Hotel> _filteredHotels;
 
         protected override ListView ListView => _hotelsListView;
-        protected override List<Hotel> ItemList => _hotels;
+        protected override List<Hotel> ItemList => Database.Hotels;
         protected override ContextMenuStrip MenuStrip => _contextMenuStrip;
         protected override ToolStripMenuItem DeleteStripMenuItem => _deleteStripMenuItem;
         protected override string KeyStart => "Hotel";
@@ -38,11 +37,11 @@ namespace HotelManager
 
         private List<Hotel> GetFilteredHotels()
         {
-            return _hotels.Where(x => x.Adress.Country.ToLower().Contains(_countryTextBox.Text.ToLower()))
-                          .Where(x => x.Adress.City.ToLower().Contains(_cityTextBox.Text.ToLower()))
-                          .Where(x => x.Adress.Street.ToLower().Contains(_streetTextBox.Text.ToLower()))
-                          .Where(x => x.Adress.House.ToLower().Contains(_houseTextBox.Text.ToLower()))
-                          .ToList();
+            return Database.Hotels.Where(x => x.Adress.Country.ToLower().Contains(_countryTextBox.Text.ToLower()))
+                                  .Where(x => x.Adress.City.ToLower().Contains(_cityTextBox.Text.ToLower()))
+                                  .Where(x => x.Adress.Street.ToLower().Contains(_streetTextBox.Text.ToLower()))
+                                  .Where(x => x.Adress.House.ToLower().Contains(_houseTextBox.Text.ToLower()))
+                                  .ToList();
         }
 
         protected override ListViewItem GetListViewItem(Hotel hotel)
@@ -55,5 +54,7 @@ namespace HotelManager
         protected override Constructor<Hotel> GetCreatingConstructor() => new HotelConstructor(GetNewId());
 
         protected override Constructor<Hotel> GetEditingConstructor(Hotel hotel) => new HotelConstructor(hotel);
+
+        protected override bool IsSuitable(Hotel item) => true;
     }
 }
