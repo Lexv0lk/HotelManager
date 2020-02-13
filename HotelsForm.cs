@@ -1,17 +1,12 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HotelManager
 {
-    public partial class HotelsForm : Form
+    public partial class HotelsForm : ListForm<Hotel>
     {
         public HotelsForm()
         {
@@ -27,9 +22,18 @@ namespace HotelManager
         private List<Hotel> _hotels = new List<Hotel>();
         private List<Hotel> _filteredHotels;
 
+        protected override ListView ListView => _hotelsListView;
+        protected override List<Hotel> ItemList => _hotels;
+        protected override ContextMenuStrip MenuStrip => _contextMenuStrip;
+        protected override ToolStripMenuItem DeleteStripMenuItem => _deleteStripMenuItem;
+        protected override string KeyStart => "Hotel";
+
         private void OnTextChanged(object sender, EventArgs e)
         {
             _filteredHotels = GetFilteredHotels();
+            ListView.Items.Clear();
+            for (int i = 0; i < _filteredHotels.Count; i++)
+                ListView.Items.Add(GetListViewItem(_filteredHotels[i]));
         }
 
         private List<Hotel> GetFilteredHotels()
@@ -40,5 +44,16 @@ namespace HotelManager
                           .Where(x => x.Adress.House.ToLower().Contains(_houseTextBox.Text.ToLower()))
                           .ToList();
         }
+
+        protected override ListViewItem GetListViewItem(Hotel hotel)
+        {
+            ListViewItem newItem = new ListViewItem($"Гостиница {hotel.Number}");
+            newItem.Tag = hotel.Id;
+            return newItem;
+        }
+
+        protected override Constructor<Hotel> GetCreatingConstructor() => new HotelConstructor(GetNewId());
+
+        protected override Constructor<Hotel> GetEditingConstructor(Hotel hotel) => new HotelConstructor(hotel);
     }
 }

@@ -100,6 +100,8 @@
             this._hotelsListView.TabIndex = 1;
             this._hotelsListView.UseCompatibleStateImageBehavior = false;
             this._hotelsListView.View = System.Windows.Forms.View.List;
+            this._hotelsListView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ListView_MouseClick);
+            this._hotelsListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.GuestListView_MouseDoubleClick);
             // 
             // _hotelAdditionButton
             // 
@@ -110,6 +112,7 @@
             this._hotelAdditionButton.TabIndex = 2;
             this._hotelAdditionButton.Text = "Добавить гостиницу";
             this._hotelAdditionButton.UseVisualStyleBackColor = true;
+            this._hotelAdditionButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // _contextMenuStrip
             // 
@@ -123,6 +126,7 @@
             this._deleteStripMenuItem.Name = "_deleteStripMenuItem";
             this._deleteStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this._deleteStripMenuItem.Text = "Удалить";
+            this._deleteStripMenuItem.Click += new System.EventHandler(this.DeleteStripMenuItem_Click);
             // 
             // _cityTextBox
             // 
@@ -173,6 +177,8 @@
             this.Controls.Add(this._hotelsListView);
             this.Name = "HotelsForm";
             this.Text = "Гостиницы";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GuestsForm_FormClosing);
+            this.Load += new System.EventHandler(this.GuestsForm_Load);
             this._contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,4 +1,4 @@
-﻿namespace HotelManagement
+﻿namespace HotelManager
 {
     partial class HotelConstructor
     {

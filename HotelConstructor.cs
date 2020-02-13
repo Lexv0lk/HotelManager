@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HotelManagement
+namespace HotelManager
 {
-    public partial class HotelConstructor : Form
+    public partial class HotelConstructor : Constructor<Hotel>
     {
         public HotelConstructor()
         {
             InitializeComponent();
+        }
+
+        public HotelConstructor(int newId) : this()
+        {
+            _newId = newId;
         }
 
         public HotelConstructor(Hotel existingHotel) : this()
@@ -33,8 +38,9 @@ namespace HotelManagement
         }
 
         private Hotel _existingHotel;
+        private int _newId;
 
-        public Action<Hotel> HotelCreated;
+        public override event Action<Hotel> ItemCreated;
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
@@ -55,8 +61,8 @@ namespace HotelManagement
 
             if (_existingHotel == null)
             {
-                Hotel newHotel = new Hotel(number, floors, rooms, country, city, street, house);
-                HotelCreated?.Invoke(newHotel);
+                Hotel newHotel = new Hotel(_newId, number, floors, rooms, country, city, street, house);
+                ItemCreated?.Invoke(newHotel);
             }
             else
             {

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HotelManager
@@ -21,7 +14,7 @@ namespace HotelManager
             {
                 new MenuItem(new GuestsForm(), this, Role.Administrator, _guestsButton),
                 new MenuItem(new Form(), this, Role.Manager, _adminsButton),
-                new MenuItem(new Form(), this, Role.Manager, _hotelsButton),
+                new MenuItem(new HotelsForm(), this, Role.Manager, _hotelsButton),
                 new MenuItem(new Form(), this, Role.Administrator, _roomsButton),
                 new MenuItem(new Form(), this, Role.Administrator, _settlementButton),
                 new MenuItem(new Form(), this, Role.Administrator, _deportationButton)
